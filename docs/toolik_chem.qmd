@@ -1,0 +1,58 @@
+---
+title: "Real data afternoon practice"
+author: "Leilanie Rubinstein"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+library(magrittr)
+```
+
+```{r}
+toolik_biochem <- here::here("data", "2011_Kling_Akchem.csv") |> 
+  readr::read_csv(na = ".", show_col_types = FALSE) |> 
+  janitor::clean_names() 
+
+inlet_biochem <- toolik_biochem |> 
+  dplyr::mutate(site = stringr::str_to_title(site)) |>
+  dplyr::filter(site == "Toolik Inlet") |> 
+  dplyr::select(site, p_h, doc_u_m, tdn_u_m)
+
+
+# for (i in  names(inlet_biochem)[2:4]) {
+#   dplyr::pull(inlet_biochem, i) |> 
+#     mean(na.rm=T) |> 
+#     cat(sep = "\n")
+# }
+
+# for (i in  seq_along(names(inlet_biochem)[2:4])) {
+
+for (i in  2:4) {
+  tmp <- inlet_biochem[, i] |> 
+    dplyr::pull() |> 
+    mean(na.rm = T) 
+  
+  cat(names(inlet_biochem)[i], "=", tmp, "\n")
+  
+}
+
+
+summarise(
+  inlet_biochem, 
+  across(
+    2:4, 
+    ~ mean(
+      .x, na.rm=T
+    )
+  )
+)
+
+
+```
+
+

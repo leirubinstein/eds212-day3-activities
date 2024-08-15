@@ -1,0 +1,65 @@
+---
+title: "Day 3 Afternoon practice"
+author: "Leilanie Rubinstein"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(stringr)
+rm(list = ls())
+
+pm2_5 <- 120
+
+if (pm2_5 < 100) {
+  print("low to moderate risk")
+} else if (pm2_5 >= 100 & pm2_5 < 150) {
+  print("unhealthy for sensitive groups")
+} else if (pm2_5 >= 150) {
+  print("health risk present")
+}
+```
+
+```{r}
+species <- "blue whale"
+
+if (species == "blue whale") {
+  print("you found a whale!")
+}
+```
+
+```{r}
+base_burrito <- 6.50
+main_ingredient <- "veggie"
+
+if (main_ingredient == "veggie") {
+  print("base burrito price")
+} else if (main_ingredient == "chicken") {
+  print("6.50 + 3.00")
+} else if (main_ingredient == "chicken") {
+  print("6.50 + 3.25")
+}
+```
+
+```{r name}
+fish <- c(8, 10, 12, 23)
+
+prop_total_fish <- vector(mode = "numeric", length = length(fish ))
+
+for (i in seq_along(fish)) {
+  prop_total_fish[i] <- fish[i]/sum(fish)
+  print(prop_total_fish[i])
+}
+```
+
+```{r name2}
+
+for (i in seq_along(month.name)) {
+  # print(i
+  # cat(month.name[i], "is month", i,"\n")
+  print(paste0(month.name[i], " is month ", i))
+}
+```
+
+
